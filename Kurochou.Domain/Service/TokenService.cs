@@ -1,5 +1,4 @@
 ﻿using Kurochou.Domain.Common;
-using Kurochou.Domain.DTO.Auth;
 using Kurochou.Domain.Interface.Service;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
