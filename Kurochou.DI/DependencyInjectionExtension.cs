@@ -15,7 +15,6 @@ public static class DependencyInjectionExtension
         {
                 services.AddServices();
                 services.AddJwt(config);
-                services.AddOpenApi();
                 services.AddControllers();
                 services.AddEndpointsApiExplorer();
 

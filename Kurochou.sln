@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kurochou.DI", "Kurochou.DI\Kurochou.DI.csproj", "{22B232C1-72CC-4A1B-83FA-D26ADE8CF9BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kurochou.Infra", "Kurochou.Infra\Kurochou.Infra.csproj", "{D2636F4D-A137-4166-905F-F74CD9D54F48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{22B232C1-72CC-4A1B-83FA-D26ADE8CF9BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22B232C1-72CC-4A1B-83FA-D26ADE8CF9BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22B232C1-72CC-4A1B-83FA-D26ADE8CF9BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2636F4D-A137-4166-905F-F74CD9D54F48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2636F4D-A137-4166-905F-F74CD9D54F48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2636F4D-A137-4166-905F-F74CD9D54F48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2636F4D-A137-4166-905F-F74CD9D54F48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
