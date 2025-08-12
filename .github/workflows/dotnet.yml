@@ -1,0 +1,54 @@
+name: CI (.NET)
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    env:
+      ASPNETCORE_ENVIRONMENT: CI
+      ConnectionStrings__DefaultConnection: ${{ secrets.DB_CONNECTION_STRING }}
+      Jwt__Key: ${{ secrets.JWT_SECRET }}
+      Jwt__Issuer: ${{ secrets.ISSUER_SECRET }}
+      Jwt__Audience: ${{ secrets.AUDIENCE_SECRET }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Cache NuGet
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Restore
+        run: dotnet restore ./Kurochou.sln
+
+      - name: Build
+        run: dotnet build ./Kurochou.sln --no-restore -c Release
+
+      - name: Test
+        run: dotnet test ./Kurochou.sln --no-build --verbosity normal
+
+      - name: Publish API
+        run: dotnet publish ./Kurochou.API/Kurochou.API.csproj -c Release -o ./out
+
+      - name: Upload publish artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-publish
+          path: out
