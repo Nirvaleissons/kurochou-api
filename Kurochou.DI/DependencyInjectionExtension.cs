@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 
 namespace Kurochou.DI;
@@ -17,6 +18,10 @@ public static class DependencyInjectionExtension
                 services.AddJwt(config);
                 services.AddControllers();
                 services.AddEndpointsApiExplorer();
+                services.AddSwaggerGen(c =>
+                {
+                        c.SwaggerDoc("v1", new OpenApiInfo { Title = "Kurochou API", Version = "v1" });
+                });
 
                 return services;
         }
