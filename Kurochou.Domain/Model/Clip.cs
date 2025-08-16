@@ -1,5 +1,8 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Kurochou.Domain.Model;
 
+[Table("clips")]
 public class Clip : BaseEntity
 {
         public string Title { get; set; } = string.Empty;

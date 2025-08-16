@@ -30,7 +30,7 @@ public class AuthController(IAuthenticationService service) : KuroController
 
                 if (result is null || string.IsNullOrWhiteSpace(result.Token))
                 {
-                        return ApiResult.Failure("Invalid credentials", 401);
+                        return ApiResult.Failure("Invalid username or password", 401);
                 }
 
                 return ApiResult.Success(result, "Logged in successfully");

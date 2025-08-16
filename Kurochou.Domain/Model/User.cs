@@ -1,14 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Kurochou.Domain.Enum;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Kurochou.Domain.Model;
 
+[Table("users")]
 public class User : BaseEntity
 {
-        [Required]
         public string Username { get; init; } = string.Empty;
-
-        [Required]
         public string PasswordHash { get; init; } = string.Empty;
-
-        public IEnumerable<Clip> Clips { get; init; } = [];
+        public UserRole Role { get; init; }
 }

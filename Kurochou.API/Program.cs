@@ -7,6 +7,8 @@ builder.Configuration
         .AddJsonFile("appsettings.{builder.Environment.EnvironmentName}.json", true)
         .AddEnvironmentVariables();
 
+// Basically map the tables and columns snake_case.
+Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
 builder.Services.AddDependencies(builder.Configuration);
 
 var app = builder.Build();

@@ -1,7 +1,10 @@
-﻿namespace Kurochou.Domain.Model;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Kurochou.Domain.Model;
 
 public abstract class BaseEntity
 {
+        [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }
