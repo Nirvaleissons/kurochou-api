@@ -31,12 +31,14 @@ public static class DependencyInjectionExtension
         {
                 services.AddScoped<ITokenService, TokenService>();
                 services.AddScoped<IAuthenticationService, AuthenticationService>();
+                services.AddScoped<IUploadService, UploadService>();
         }
 
         private static void AddRepositories(this IServiceCollection services)
         {
                 services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
                 services.AddScoped<IUserRepository, UserRepository>();
+                services.AddScoped<IClipRepository, ClipRepository>();
         }
 
         private static void AddDatabase(this IServiceCollection services, IConfiguration config)

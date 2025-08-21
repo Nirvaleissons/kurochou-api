@@ -4,5 +4,5 @@ namespace Kurochou.Domain.Interface.Service;
 
 public interface IUploadService
 {
-        Task<string> Upload(UploadRequest request, CancellationToken cancellationToken);
+        Task<int> Upload(UploadRequest request, CancellationToken cancellationToken, Guid userId);
 }

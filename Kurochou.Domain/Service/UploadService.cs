@@ -1,23 +1,41 @@
 ﻿using Kurochou.Domain.DTO.Clips;
+using Kurochou.Domain.Interface.Repository;
 using Kurochou.Domain.Interface.Service;
+using Kurochou.Domain.Model;
 
 namespace Kurochou.Domain.Service;
 
 public class UploadService : IUploadService
 {
-        public async Task<string> Upload(UploadRequest request, CancellationToken cancellationToken)
+        private readonly IClipRepository _clipRepository;
+
+        public UploadService(IClipRepository clipRepository)
         {
-                var sanitizedTitle = string.Concat(request.Title.Split(Path.GetInvalidFileNameChars()));
-                var fileName = $"{sanitizedTitle}{Path.GetExtension(request.File.FileName)}";
-                var savePath = Path.Combine("Uploads", fileName);
+                _clipRepository = clipRepository;
+        }
 
-                Directory.CreateDirectory("Uploads");
-
-                using (var stream = new FileStream(savePath, FileMode.Create))
+        public async Task<int> Upload(UploadRequest request, CancellationToken cancellationToken, Guid userId)
+        {
+                byte[] fileBytes;
+                using (MemoryStream ms = new MemoryStream())
                 {
-                        await request.File.CopyToAsync(stream, cancellationToken);
+                        await request.FileData.CopyToAsync(ms, cancellationToken);
+                        fileBytes = ms.ToArray();
                 }
 
-                return fileName;
+                var clip = new Clip()
+                {
+                        Title = request.Title,
+                        Description = request.Description,
+                        UserId = userId,
+                        Upvote = 0,
+                        IsPublic = request.IsPublic,
+                        FileData = fileBytes,
+                        CreatedAt = DateTime.Now,
+                };
+                
+                var clipId = await  _clipRepository.InsertAsync(clip);
+                return clipId;
         }
+        
 }

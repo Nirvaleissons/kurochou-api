@@ -2,4 +2,4 @@
 
 namespace Kurochou.Domain.DTO.Clips;
 
-public record UploadRequest(string Title, string Description, Guid UserId, int Like, IFormFile File);
+public record UploadRequest(string Title, string Description, Guid UserId, bool IsPublic, IFormFile FileData, DateTime UploadDate);
