@@ -39,3 +39,6 @@ _ReSharper*/
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+
+Kurochou.API/appsettings.Development.json
+.idea/
