@@ -7,6 +7,5 @@ namespace Kurochou.Infra.Repositories;
 
 public class ClipRepository(IDbConnection conn) : Repository<Clip>(conn), IClipRepository
 {
-    private readonly IDbConnection _conn = conn;
-    
+        private readonly IDbConnection _conn = conn;
 }

@@ -5,16 +5,9 @@ using Kurochou.Domain.Model;
 
 namespace Kurochou.Domain.Service;
 
-public class UploadService : IUploadService
+public class UploadService(IClipRepository clipRepository) : IUploadService
 {
-        private readonly IClipRepository _clipRepository;
-
-        public UploadService(IClipRepository clipRepository)
-        {
-                _clipRepository = clipRepository;
-        }
-
-        public async Task<int> Upload(UploadRequest request, CancellationToken cancellationToken, Guid userId)
+        public async Task<int> Upload(UploadRequest request, Guid userId, CancellationToken cancellationToken)
         {
                 byte[] fileBytes;
                 using (MemoryStream ms = new MemoryStream())
@@ -23,7 +16,7 @@ public class UploadService : IUploadService
                         fileBytes = ms.ToArray();
                 }
 
-                var clip = new Clip()
+                var clip = new Clip
                 {
                         Title = request.Title,
                         Description = request.Description,
@@ -34,7 +27,7 @@ public class UploadService : IUploadService
                         CreatedAt = DateTime.Now,
                 };
                 
-                var clipId = await  _clipRepository.InsertAsync(clip);
+                var clipId = await clipRepository.InsertAsync(clip);
                 return clipId;
         }
         

@@ -10,7 +10,7 @@ public class ClipController(IUploadService uploadService) : KuroController
         [HttpPost("Upload")]
         public async Task<IResult> Upload([FromForm] UploadRequest request, CancellationToken cancellationToken)
         {
-                var clipId = await uploadService.Upload(request, cancellationToken, request.UserId);
+                var clipId = await uploadService.Upload(request, request.UserId, cancellationToken);
                 return ApiResult.Success(clipId);
         }
 }
